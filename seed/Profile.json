@@ -1,0 +1,28 @@
+{
+	"firstName": "Yurii",
+	"lastName": "Kalashnikov",
+	"age": 28,
+	"position":"SD",
+	"team":"Khabib" 
+}
+{
+	"firstName": "Dima",
+	"lastName": "Kalashnikov",
+	"age": 32,
+	"position":"AS",
+	"team":"Spanch Bob" 
+}
+{
+	"firstName": "Oleg",
+	"lastName": "Emelin",
+	"age": 28,
+	"position":"Narimanov",
+	"team":"Emel'yanenko" 
+}
+{
+	"firstName": "Alex",
+	"lastName": "Skripchenkov",
+	"age": 28,
+	"position":"Moscow",
+	"team":"Night club" 
+}
