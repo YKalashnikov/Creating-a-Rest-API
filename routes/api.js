@@ -18,10 +18,12 @@ const db = {
 	products: products,
 	colors: color
 }  */
+
+//GET
 router.get('/:resource',(req,res)=> {
 	const resource = req.params.resource
 	const controller = controllers[resource]
-
+    const filter = req.query
 	if(controller == null) {
 		res.json({
 			confirmation:'fail',
@@ -29,7 +31,7 @@ router.get('/:resource',(req,res)=> {
 		})
 		return 
 	}
-	controller.get()
+	controller.get(filter)
 	.then(data => {
 		res.json({
 			confirmation:'success',
@@ -62,7 +64,7 @@ router.get('/:resource',(req,res)=> {
 				confirmation:'success',
 				data: data
 			})
-			.catch(err => {
+		.catch(err => {
 				res.json({
 					confirmation:'fail',
 					message: err.message
@@ -71,70 +73,32 @@ router.get('/:resource',(req,res)=> {
 			})
 		})
 	})
-
-
-
-
-
-
-
-
-
+	//POST create new records
+    router.post('/:resource',(req,res) => {
+		const resource = req.params.resource
+		const controller = controllers[resource]
+		if(controller == null){
+			res.json({
+				confirmation:'fail',
+				message:'Invalid request'
+			})
+			return
+		}
+		controller.post(req.body)
+		.then(data => {
+			res.json({
+				confirmation:'success',
+				data: data
+			})
+		.catch(err => {
+			res.json({
+				confirmation:'fail',
+				message: err.message
+			})
+		})
+		})
+	})
 }) 
-/* 
-router.get('/contacts', (req,res) => {
-	Contacts.find(null)
-.then(data=>{
-	res.json({confirmation:'success',
-				data:data})
-})
-.catch(err=>{
-	res.json({confirmation:'fail',
- 	 		  message:err.message})
-	
-})
-})
 
-router.get('/profiles', (req,res) => {
-	Profile.find(null)
-.then(data=>{
-	res.json({confirmation:'success',
-				data:data})
-})
-.catch(err=>{
-	res.json({confirmation:'fail',
- 	 		  message:err.message})
-	
-})
-}) */
- /* 
-router.get('/:resource', (req,res)=> {
-	const resource = req.params.resource;
-	console.log(resource)
-
-	const data = db[resource];
-	if(data == null) {
-		 res.json({
-			 confirmation:'fail',
-			 data:"Invalid equest. Resource undefined"
-		 })
-		 return 
-	}
-	res.json({
-		confirmation:"success",
-		data:data
-	})
-}) */
-/* router.get('/contacts',(req,res)=>{
-	res.json({
-		confirmation:"legenda",
-		name:{contacts}
-	})
-})
-router.get('/city',(req,res)=>{
-	res.json({
-		name:{city}
-	})
-}) */
 
 module.exports=router

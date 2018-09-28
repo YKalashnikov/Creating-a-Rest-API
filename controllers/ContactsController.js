@@ -4,24 +4,34 @@ module.exports = {
     get: (params) => {
         return new Promise ((resolve, reject) => {
             Contacts.find(params)
-            .then(data=>{
+            .then(data => {
                  resolve(data)
             })
-            .catch(err=>{
+            .catch(err => {
                   reject(err)
             })
         })
     },
     getById: (id) => {
-        return new Promise ((resolve, reject)=>{
+        return new Promise ((resolve, reject) => {
             Contacts.findById(id)
-            .then(data=> {
+            .then(data => {
                     resolve(data)
             })
-                .catch(err=> {
-                    reject(err)
+            .catch(err => {
+                    reject(new Error('Contact '+ id +'was not found'))
                 })
         })
+    },
+    post: (params) => {
+        return new Promise ((resolve, reject) => {
+            Contacts.create(params)
+            .then(data => {
+                resolve(data)
+            })
+            .catch(err => {
+                reject(err)
+            })
+        })
     }
-
 }
