@@ -98,7 +98,34 @@ router.get('/:resource',(req,res)=> {
 		})
 		})
 	})
+	//PUT updating
+	router.put('/:resource/:id',(req ,res) => {
+		const resource = req.params.resource
+		const id = req.params.id
+		const controller = controllers[resource]
+		if(controller == null){
+			res.json({
+				confirmation:'fail',
+				message:'Invalid request'
+			})
+			return
+		}
+		controller.put(id, req.body)
+		.then(data => {
+            res.json({
+				confirmation:'success',
+				data: data
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation:'fail',
+				message: err.message
+			})
+		})
+
+	})
 }) 
 
 
-module.exports=router
+module.exports = router

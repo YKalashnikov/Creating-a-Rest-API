@@ -33,5 +33,16 @@ module.exports = {
                 reject(err)
             })
         })
+    },
+    put: (id, params) => {
+        return new Promise ((resolve, reject) => {
+            Profile.findByIdAndUpdate(id, params, {new:true})
+            .then(data => {
+                resolve(id, params)
+            })
+            .catch(err => {
+                reject(err)
+            })
+        })
     }
 }
