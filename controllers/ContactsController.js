@@ -44,5 +44,16 @@ module.exports = {
                 reject(err)
             })
         })
+    },
+    delete: (id) => {
+        return new Promise ((resolve, reject) => {
+            Contacts.findByIdAndRemove(id)
+            .then(data => {
+                resolve(id)
+            })
+            .catch(err => {
+                reject(err)
+            })
+        })
     }
 }

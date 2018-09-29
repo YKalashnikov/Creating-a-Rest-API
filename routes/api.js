@@ -125,6 +125,32 @@ router.get('/:resource',(req,res)=> {
 		})
 
 	})
+	//DELETE
+	router.delete('/:resource/:id', (req, res)=> {
+		const resource = req.params.resource
+		const id = req.params.id
+		const controller = controllers[resource]
+		if(controller == null){
+			res.json({
+				confirmation:'fail',
+				message:'Invalid request'
+			})
+			return
+		}
+		controller.delete(id)
+		.then(data => {
+            res.json({
+				confirmation:'success',
+				data: data
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation:'fail',
+				message: err.message
+			})
+		})
+	})
 }) 
 
 
